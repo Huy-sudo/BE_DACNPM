@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Uses;
+use App\Report_revenue_detail;
 
-class useController extends Controller
+class reportRevenueDetailController extends Controller
 {
     public function index(Request $request){
         $arrayInput = $request->all();
 
-        $model = new Uses();
+        $model = new Report_revenue_detail();
 
         $results = $model->Search($arrayInput);
 
@@ -26,10 +26,14 @@ class useController extends Controller
 
     public function create(Request $request)
     {
+        $request->validate([
+            'report_id'=>'required|integer',
+            'customers'=>'required|integer',
+        ]);
 
         $arrayInput = $request->all();
 
-        $model = new Uses();
+        $model = new Report_revenue_detail();
 
         $results = $model->createv2($arrayInput);
 
@@ -45,14 +49,14 @@ class useController extends Controller
 
     public function detail(Request $request, $id)
     {
-        $model = new Uses();
+        $model = new Report_revenue_detail();
 
-        $Uses =  $model->detail( $id);
+        $Report_revenue_detail =  $model->detail( $id);
 
         $return = [
             'status' => '1',
             'code' => '200',
-            'data' => $Uses
+            'data' => $Report_revenue_detail
         ];
         return response()->json($return);
     }
@@ -60,9 +64,9 @@ class useController extends Controller
     public function delete(Request $request, $id)
     {
         
-        $model = new Uses();
+        $model = new Report_revenue_detail();
 
-        $Uses =  $model->deletev2( $id);
+        $Report_revenue_detail =  $model->deletev2( $id);
 
         $return = [
             'status' => '1',
@@ -74,16 +78,17 @@ class useController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $arrayInput = $request->all();
 
-        $model = new Uses();
+        $model = new Report_revenue_detail();
 
-        $Uses =$model->updatev2($arrayInput, $id);
+        $Report_revenue_detail =$model->updatev2($arrayInput, $id);
         
         $return = [
             'status' => '1',
             'code' => '200',
-            'data' => $Uses
+            'data' => $Report_revenue_detail
         ];
         
         return response()->json($return);

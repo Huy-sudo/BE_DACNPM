@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Uses;
+use App\Report_medicine;
 
-class useController extends Controller
+class reportMedicineController extends Controller
 {
     public function index(Request $request){
         $arrayInput = $request->all();
 
-        $model = new Uses();
+        $model = new Report_medicine();
 
         $results = $model->Search($arrayInput);
 
@@ -26,10 +26,16 @@ class useController extends Controller
 
     public function create(Request $request)
     {
+        $request->validate([
+            'user_id'=>'required|integer',
+            'medicine_code'=>'required|integer',
+            'times'=>'required|integer',
+            'amount'=>'required|integer'
+        ]);
 
         $arrayInput = $request->all();
 
-        $model = new Uses();
+        $model = new Report_medicine();
 
         $results = $model->createv2($arrayInput);
 
@@ -45,14 +51,14 @@ class useController extends Controller
 
     public function detail(Request $request, $id)
     {
-        $model = new Uses();
+        $model = new Report_medicine();
 
-        $Uses =  $model->detail( $id);
+        $Report_medicine =  $model->detail( $id);
 
         $return = [
             'status' => '1',
             'code' => '200',
-            'data' => $Uses
+            'data' => $Report_medicine
         ];
         return response()->json($return);
     }
@@ -60,9 +66,9 @@ class useController extends Controller
     public function delete(Request $request, $id)
     {
         
-        $model = new Uses();
+        $model = new Report_medicine();
 
-        $Uses =  $model->deletev2( $id);
+        $Report_medicine =  $model->deletev2( $id);
 
         $return = [
             'status' => '1',
@@ -74,16 +80,20 @@ class useController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'user_id'=>'integer',
+        ]);
+        
         $arrayInput = $request->all();
 
-        $model = new Uses();
+        $model = new Report_medicine();
 
-        $Uses =$model->updatev2($arrayInput, $id);
+        $Report_medicine =$model->updatev2($arrayInput, $id);
         
         $return = [
             'status' => '1',
             'code' => '200',
-            'data' => $Uses
+            'data' => $Report_medicine
         ];
         
         return response()->json($return);

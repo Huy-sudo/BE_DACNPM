@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMedicinesInventory extends Migration
+class CreateImportMedicineDetail extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateMedicinesInventory extends Migration
      */
     public function up()
     {
-        Schema::create('medicines_inventory', function (Blueprint $table) {
+        Schema::create('import_medicine_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->tinyInteger('medicine_id')->index();
             $table->tinyInteger('import_id')->index();
-            $table->tinyInteger('amount')->index();
-            $table->bigInteger('cost_per_med')->index();
-            $table->bigInteger('total')->index();
+            $table->tinyInteger('medicine_code')->index();
+            $table->tinyInteger('amount');
+            $table->bigInteger('cost_per_med');
+            $table->bigInteger('total_amount');
+            $table->tinyInteger('status')->default(1)->comment('1-active; 0-deleted; 2-inactive');
+
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ class CreateMedicinesInventory extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medicines_inventory');
+        Schema::dropIfExists('import_medicine_detail');
     }
 }

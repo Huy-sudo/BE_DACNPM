@@ -5,9 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Unit extends Model
+class Uses extends Model
 {
-    protected $table = 'unit';
+    protected $table = 'uses';
 
     protected $fillable = [
         'id',
@@ -47,7 +47,7 @@ class Unit extends Model
     {
         $arrayInput = $request;
         
-        $results = Unit::create($arrayInput);
+        $results = Uses::create($arrayInput);
 
         return $results;
 
@@ -56,17 +56,17 @@ class Unit extends Model
     public function detail( $id)
     {
         
-        $Unit = Unit::where('id', $id)->first();
+        $Uses = Uses::where('id', $id)->first();
 
-        return $Unit;
+        return $Uses;
     }
 
     public function deletev2($id)
     {
         
-        $Unit = Unit::where('id', $id)->first();
+        $Uses = Uses::where('id', $id)->first();
 
-        return $Unit;
+        return $Uses;
     }
 
     public function updatev2(Array $request)

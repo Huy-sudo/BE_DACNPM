@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Uses;
+use App\Import_medicine_detail;
 
-class useController extends Controller
+class importMedicineDetailController extends Controller
 {
     public function index(Request $request){
         $arrayInput = $request->all();
 
-        $model = new Uses();
+        $model = new Import_medicine_detail();
 
         $results = $model->Search($arrayInput);
 
@@ -26,10 +26,16 @@ class useController extends Controller
 
     public function create(Request $request)
     {
+        $request->validate([
+            'import_id'=>'required|integer',
+            'medicine_code'=>'required|integer',
+            'amount'=>'required|integer',
+            'cost_per_med'=>'required|integer'
+        ]);
 
         $arrayInput = $request->all();
 
-        $model = new Uses();
+        $model = new Import_medicine_detail();
 
         $results = $model->createv2($arrayInput);
 
@@ -45,14 +51,14 @@ class useController extends Controller
 
     public function detail(Request $request, $id)
     {
-        $model = new Uses();
+        $model = new Import_medicine_detail();
 
-        $Uses =  $model->detail( $id);
+        $Import_medicine_detail =  $model->detail( $id);
 
         $return = [
             'status' => '1',
             'code' => '200',
-            'data' => $Uses
+            'data' => $Import_medicine_detail
         ];
         return response()->json($return);
     }
@@ -60,9 +66,9 @@ class useController extends Controller
     public function delete(Request $request, $id)
     {
         
-        $model = new Uses();
+        $model = new Import_medicine_detail();
 
-        $Uses =  $model->deletev2( $id);
+        $Import_medicine_detail =  $model->deletev2( $id);
 
         $return = [
             'status' => '1',
@@ -74,16 +80,17 @@ class useController extends Controller
 
     public function update(Request $request, $id)
     {
+        
         $arrayInput = $request->all();
 
-        $model = new Uses();
+        $model = new Import_medicine_detail();
 
-        $Uses =$model->updatev2($arrayInput, $id);
+        $Import_medicine_detail =$model->updatev2($arrayInput, $id);
         
         $return = [
             'status' => '1',
             'code' => '200',
-            'data' => $Uses
+            'data' => $Import_medicine_detail
         ];
         
         return response()->json($return);

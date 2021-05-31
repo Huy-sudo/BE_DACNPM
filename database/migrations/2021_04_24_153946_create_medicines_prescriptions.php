@@ -21,7 +21,7 @@ class CreateMedicinesPrescriptions extends Migration
             $table->tinyInteger('amount')->index();
             $table->tinyInteger('uses')->index();
             $table->bigInteger('cost_per_med')->index();
-            
+            $table->bigInteger('total')->index();
             $table->timestamps();
         });
     }

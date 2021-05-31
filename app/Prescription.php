@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Customer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+
 class Prescription extends Model
 {
     protected $table = 'prescriptions';
@@ -72,6 +73,7 @@ class Prescription extends Model
         }
         
         $model = $model->with('prescriptionDetail.medicine');
+        
         $results = $model->get();
         
         return $results;
