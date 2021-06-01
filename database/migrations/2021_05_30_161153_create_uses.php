@@ -15,6 +15,7 @@ class CreateUses extends Migration
     {
         Schema::create('uses', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('value');
             $table->timestamps();
         });
     }

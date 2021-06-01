@@ -17,6 +17,9 @@ class Medicine_inventory extends Model
         'medicine_id',
         'type',
         'amount',
+        'cost_per_med',
+        'total',
+        'in_stock_after',
         'created_at',
         'updated_at'
     ];
@@ -55,6 +58,18 @@ class Medicine_inventory extends Model
             $model = $model->where('amount',$request['amount']);
         }
 
+        if(isset($request['total']) && $request['total']){
+            $model = $model->where('total',$request['total']);
+        }
+
+        if(isset($request['in_stock_after']) && $request['in_stock_after']){
+            $model = $model->where('in_stock_after',$request['in_stock_after']);
+        }
+
+        if(isset($request['cost_per_med']) && $request['cost_per_med']){
+            $model = $model->where('cost_per_med',$request['cost_per_med']);
+        }
+
         if(isset($request['from_date']) && $request['from_date']){
             $from_date=Carbon::create($request['from_date'])->startOfDay();
             $model = $model->where('created_at','>',$from_date);
@@ -80,8 +95,6 @@ class Medicine_inventory extends Model
         
         try {
        
-        $results['Medicine_inventory'] = Medicine_inventory::create($arrayInput);
-
         $model_medicine = new Medicine;
 
         $medicine = $model_medicine->Search(['id'=>$request['medicine_id']]);
@@ -89,6 +102,10 @@ class Medicine_inventory extends Model
         $results['medicine'] = $medicine[0]->updatev2([
             'in_stock'=> $request['type'] == 1 ? $medicine[0]->in_stock + $request['amount'] : $medicine[0]->in_stock - $request['amount']
         ]);
+
+        $arrayInput['in_stock_after'] = $medicine[0]->in_stock;
+
+        $results['Medicine_inventory'] = Medicine_inventory::create($arrayInput);
 
         DB::commit();
         } 

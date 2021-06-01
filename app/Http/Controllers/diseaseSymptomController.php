@@ -26,8 +26,7 @@ class diseaseSymptomController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'code'=>'required|varchar',
-            'symptom_name'=>'required|varchar',
+            'symptom_name'=>'required|string',
         ]);
 
         $arrayInput = $request->all();
@@ -78,11 +77,6 @@ class diseaseSymptomController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'code'=>'required|varchar',
-            'symptom_name'=>'required|varchar'
-        ]);
-        
         $arrayInput = $request->all();
 
         $model = new Disease_Symptom();
