@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImportMedicines extends Migration
+class AddStatusToPrescriptionsDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,8 @@ class CreateImportMedicines extends Migration
      */
     public function up()
     {
-        Schema::create('import_medicines', function (Blueprint $table) {
-            $table->bigIncrements('id')->index();
-            $table->bigInteger('total')->index();
-            $table->date('date');
-            $table->tinyInteger('user_id')->index();
+        Schema::table('prescriptions_details', function (Blueprint $table) {
             $table->tinyInteger('status')->default(1)->comment('1-active; 0-deleted; 2-inactive');
-
-            $table->timestamps();
         });
     }
 
@@ -31,6 +25,8 @@ class CreateImportMedicines extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('import_medicines');
+        Schema::table('prescriptions_details', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
     }
 }

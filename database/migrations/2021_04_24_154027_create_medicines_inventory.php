@@ -16,10 +16,10 @@ class CreateMedicinesInventory extends Migration
         Schema::create('medicines_inventory', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->tinyInteger('medicine_id')->index();
-            $table->tinyInteger('import_id')->index();
             $table->tinyInteger('amount')->index();
-            $table->bigInteger('cost_per_med')->index();
-            $table->bigInteger('total')->index();
+            $table->tinyInteger('type')->default(1)->comment('1-this_month; 2-last_month')->nullable(); 
+            $table->tinyInteger('status')->default(1)->comment('1-active; 0-deleted; 2-inactive');
+
             $table->timestamps();
         });
     }
