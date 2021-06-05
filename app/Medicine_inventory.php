@@ -90,14 +90,6 @@ class Medicine_inventory extends Model
         $arrayInput = $request;
 
         $arrayInput['status'] = 1;
-
-        $arrayInput['type'] = 1;
-
-        $arrayInput['cost_per_med']='50000';
-
-        $arrayInput['total']= $arrayInput['amount'] * $arrayInput['cost_per_med'];
-
-        // $arrayInput['in_stock_after'] = $arrayInput['amount'];
         
         DB::beginTransaction();
         
@@ -105,11 +97,15 @@ class Medicine_inventory extends Model
        
         $model_medicine = new Medicine;
 
-        $medicine = $model_medicine->where(['id',$request['medicine_id']])->first();
+        $medicine = $model_medicine->where('id',$request['medicine_id'])->first();
 
-        // $results['medicine'] = $medicine[0]->updatev2([
-        //     'in_stock'=> $request['type'] == 1 ? $medicine[0]->in_stock + $request['amount'] : $medicine[0]->in_stock - $request['amount']
-        // ]);
+        $arrayInput['cost_per_med'] = $medicine->cost_per_med;
+
+        $arrayInput['total'] =  $medicine->cost_per_med * $request['amount'];
+
+        $results['medicine'] = $medicine->updatev2([
+            'in_stock'=> $request['type'] == 1 ? $medicine->in_stock + $request['amount'] : $medicine->in_stock - $request['amount']
+        ]);
 
         $arrayInput['in_stock_after'] = $medicine->in_stock;
 
