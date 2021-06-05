@@ -26,6 +26,7 @@ class medicineInventoryController extends Controller
         $request->validate([
             'medicine_id'=>'required|string',
             'amount'=>'required|integer',
+            'type'=>'required|integer'
         ]);
 
         $arrayInput = $request->all();
