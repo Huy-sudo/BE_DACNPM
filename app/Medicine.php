@@ -16,6 +16,7 @@ class Medicine extends Model
     ];
 
     protected $fillable = [
+        'id',
         'in_stock',
         'unit',
         'cost_per_med',
@@ -24,9 +25,14 @@ class Medicine extends Model
         'updated_at'
     ];
 
-    public function prescription()
+    public function medicinePrescription()
     {
-        return $this->hasMany(Prescription::class,'customer_id','code');
+        return $this->hasOne(Medicines_prescription::class,'medicine_code','code');
+    }
+
+    public function unit()
+    {
+        return $this->hasOne(Unit::class,'id','unit');
     }
 
     public function Search(array $request){
@@ -88,7 +94,8 @@ class Medicine extends Model
     public function detail( $id)
     {
         
-        $Medicine = Medicine::where('id', $id)->first();
+        $Medicine = Medicine::where('id', $id)
+        ->with('unit')->first();
 
         return $Medicine;
     }

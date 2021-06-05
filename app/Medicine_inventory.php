@@ -103,7 +103,7 @@ class Medicine_inventory extends Model
             'in_stock'=> $request['type'] == 1 ? $medicine[0]->in_stock + $request['amount'] : $medicine[0]->in_stock - $request['amount']
         ]);
 
-        $arrayInput['in_stock_after'] = $medicine[0]->in_stock;
+        // $arrayInput['in_stock_after'] = $medicine[0]->in_stock;
 
         $results['Medicine_inventory'] = Medicine_inventory::create($arrayInput);
 
@@ -111,11 +111,9 @@ class Medicine_inventory extends Model
         } 
         catch (\Throwable $th) {
         DB::rollBack();
-    
         }
-
+        
         return $results;
-
     }
 
     public function detail( $id)

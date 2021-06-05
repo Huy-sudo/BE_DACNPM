@@ -107,6 +107,14 @@ Route::group(['middleware' => 'auth:api','prefix'=>'bill'], function () {
     Route::delete('/{id}','billController@delete');
 });
 
+Route::group(['middleware' => 'auth:api','prefix'=>'unit'], function () {
+    Route::get('/','unitController@index');
+    Route::post('/','unitController@create');
+    Route::get('/{id}','unitController@detail');
+    Route::put('/{id}','unitController@update');
+    Route::delete('/{id}','unitController@delete');
+});
+
 Route::group([
     'prefix' => 'auth'
 ], function () {

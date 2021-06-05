@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class Unit extends Model
 {
-    protected $table = 'unit';
+    protected $table = 'units';
 
     protected $fillable = [
         'id',
@@ -15,6 +15,11 @@ class Unit extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function medicine()
+    {
+        return $this->hasMany(Medicine::class,'unit','id');
+    }
 
     public function Search(array $request){
 
