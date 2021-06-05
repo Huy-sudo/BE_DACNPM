@@ -26,7 +26,6 @@ class medicineInventoryController extends Controller
         $request->validate([
             'medicine_id'=>'required|string',
             'amount'=>'required|integer',
-            'type'=>'required|integer'
         ]);
 
         $arrayInput = $request->all();
@@ -78,7 +77,7 @@ class medicineInventoryController extends Controller
     {
         $request->validate([
             'amount'=>'integer',
-            'uses'=>'integer',
+            'user'=>'integer',
         ]);
         
         $arrayInput = $request->all();

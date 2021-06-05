@@ -90,6 +90,14 @@ class Medicine_inventory extends Model
         $arrayInput = $request;
 
         $arrayInput['status'] = 1;
+
+        $arrayInput['type'] = 1;
+
+        $arrayInput['cost_per_med']='50000';
+
+        $arrayInput['total']= $arrayInput['amount'] * $arrayInput['cost_per_med'];
+
+        // $arrayInput['in_stock_after'] = $arrayInput['amount'];
         
         DB::beginTransaction();
         
@@ -97,13 +105,13 @@ class Medicine_inventory extends Model
        
         $model_medicine = new Medicine;
 
-        $medicine = $model_medicine->Search(['id'=>$request['medicine_id']]);
+        $medicine = $model_medicine->where(['id',$request['medicine_id']])->first();
 
-        $results['medicine'] = $medicine[0]->updatev2([
-            'in_stock'=> $request['type'] == 1 ? $medicine[0]->in_stock + $request['amount'] : $medicine[0]->in_stock - $request['amount']
-        ]);
+        // $results['medicine'] = $medicine[0]->updatev2([
+        //     'in_stock'=> $request['type'] == 1 ? $medicine[0]->in_stock + $request['amount'] : $medicine[0]->in_stock - $request['amount']
+        // ]);
 
-        // $arrayInput['in_stock_after'] = $medicine[0]->in_stock;
+        $arrayInput['in_stock_after'] = $medicine->in_stock;
 
         $results['Medicine_inventory'] = Medicine_inventory::create($arrayInput);
 
@@ -111,9 +119,11 @@ class Medicine_inventory extends Model
         } 
         catch (\Throwable $th) {
         DB::rollBack();
+    
         }
-        
-        return $results;
+
+        return $results ;
+
     }
 
     public function detail( $id)
