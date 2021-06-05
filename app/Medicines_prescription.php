@@ -115,7 +115,7 @@ class Medicines_prescription extends Model
             'price_medicines'=>$prescription_detail->price_medicines + $medicine->cost_per_med * $request['amount']
             ]);
             DB::commit();
-        } 
+        }   
         catch (\Throwable $th) {
             return $th;
         DB::rollBack();
