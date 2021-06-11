@@ -98,13 +98,15 @@ class prescriptionController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name'=>'string',
+            'id'=>'required|integer',
         ]);
-        
-        $arrayInput = $request->all();
-        $model = new prescription;
 
-        $prescription =$model->updatev2($arrayInput, $id);
+        $arrayInput = $request->all();
+
+        $model = prescription::where('id',$id)->first();
+
+        $prescription = $model->updatev2($arrayInput, $id);
+       
         $return = [
             'status' => '1',
             'code' => '200',

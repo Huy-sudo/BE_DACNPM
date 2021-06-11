@@ -124,8 +124,9 @@ class Prescription extends Model
     
     public function updatev2(Array $request)
     {
-
+        
         $arrayInput = [];
+
         if(isset($request['status']) && $request['status']){
             $arrayInput['status'] =$request['status'];
         }
@@ -150,8 +151,16 @@ class Prescription extends Model
             $arrayInput['phone'] =$request['phone'];
         }
 
+        if(isset($request['symptoms']) && $request['symptoms']){
+            $arrayInput['symptoms'] = $request['symptoms'];
+        }
+
+        if(isset($request['diseases']) && $request['diseases']){
+            $arrayInput['diseases'] = $request['diseases'];
+        }
+
         $this->update($arrayInput);
-        
+
         return $this;
     }
 

@@ -114,6 +114,7 @@ class Prescriptions_detail extends Model
     {
         
         $Prescriptions_detail = Prescriptions_detail::where('id', $id)->first();
+        
         $Prescriptions_detail->update(['status'=>'2']);
 
         return $Prescriptions_detail;
