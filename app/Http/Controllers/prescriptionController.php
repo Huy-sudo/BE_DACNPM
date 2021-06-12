@@ -97,9 +97,6 @@ class prescriptionController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'id'=>'required|integer',
-        ]);
 
         $arrayInput = $request->all();
 
