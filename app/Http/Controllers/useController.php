@@ -27,6 +27,10 @@ class useController extends Controller
     public function create(Request $request)
     {
 
+        $request->validate([
+            'value'=>'required|string',
+        ]);
+        
         $arrayInput = $request->all();
 
         $model = new Uses();

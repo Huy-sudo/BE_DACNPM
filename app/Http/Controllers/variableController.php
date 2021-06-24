@@ -27,6 +27,11 @@ class variableController extends Controller
     public function create(Request $request)
     {
 
+        $request->validate([
+            'key'=>'required|string',
+            'value'=>'required|integer'
+        ]);
+
         $arrayInput = $request->all();
 
         $model = new Variable();

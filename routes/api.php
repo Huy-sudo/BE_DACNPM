@@ -115,6 +115,22 @@ Route::group(['middleware' => 'auth:api','prefix'=>'unit'], function () {
     Route::delete('/{id}','unitController@delete');
 });
 
+Route::group(['middleware' => 'auth:api','prefix'=>'use'], function () {
+    Route::get('/','useController@index');
+    Route::post('/','useController@create');
+    Route::get('/{id}','useController@detail');
+    Route::put('/{id}','useController@update');
+    Route::delete('/{id}','useController@delete');
+});
+
+Route::group(['middleware' => 'auth:api','prefix'=>'variable'], function () {
+    Route::get('/','variableController@index');
+    Route::post('/','variableController@create');
+    Route::get('/{id}','variableController@detail');
+    Route::put('/{id}','variableController@update');
+    Route::delete('/{id}','variableController@delete');
+});
+
 Route::group([
     'prefix' => 'auth'
 ], function () {

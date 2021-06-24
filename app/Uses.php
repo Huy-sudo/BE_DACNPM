@@ -45,9 +45,9 @@ class Uses extends Model
 
     public function createv2(Array $request)
     {
-        $arrayInput = [
-            'value' => $request['value']
-        ];
+        $arrayInput = $request;
+
+        $arrayInput['status'] = 1; 
         
         $results = Uses::create($arrayInput);
 

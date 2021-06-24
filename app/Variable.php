@@ -57,10 +57,9 @@ class Variable extends Model
     public function createv2(Array $request)
     {
 
-        $arrayInput = [
-            'key' => $request['key'],
-            'value' => $request['value']
-        ];
+        $arrayInput = $request;
+
+        $arrayInput['status'] = 1; 
 
         $results = Variable::create($arrayInput);
 
@@ -84,6 +83,7 @@ class Variable extends Model
 
         return $Variable;
     }
+    
     public function updatev2(Array $request, $id)
     {
 

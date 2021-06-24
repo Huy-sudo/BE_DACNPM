@@ -50,9 +50,9 @@ class Unit extends Model
 
     public function createv2(Array $request)
     {
-        $arrayInput = [
-            'value' => $request['value']
-        ];
+        $arrayInput = $request;
+
+        $arrayInput['status'] = 1; 
         
         $results = Unit::create($arrayInput);
 

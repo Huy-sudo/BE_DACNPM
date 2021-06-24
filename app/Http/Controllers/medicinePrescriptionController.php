@@ -22,12 +22,7 @@ class medicinePrescriptionController extends Controller
 
     public function create(Request $request)
     {
-        $request->validate([
-            'medicine_code'=>'required|string',
-            'PD_code'=>'required|string',
-            'amount'=>'required|integer',
-            'uses'=>'required|integer'
-        ]);
+
         $arrayInput = $request->all();
         $model = new Medicines_prescription;
         $results = $model->createv2($arrayInput);
