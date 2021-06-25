@@ -97,13 +97,6 @@ class prescriptionController extends Controller
 
     public function update(Request $request, $id)
     {
-<<<<<<< HEAD
-=======
-        $request->validate([
-            'id'=>'required|integer'
-        ]);
->>>>>>> 6a14a2c (/)
-
         $arrayInput = $request->all();
 
         $model = prescription::where('id',$id)->first();
@@ -113,7 +106,7 @@ class prescriptionController extends Controller
         $return = [
             'status' => '1',
             'code' => '200',
-            'data' => $prescription
+            'data' => $prescription 
         ];
         
         return response()->json($return);
