@@ -16,7 +16,7 @@ class CreateVariables extends Migration
         Schema::create('variables', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('key');
-            $table->tinyInteger('value');
+            $table->bigInteger('value');
             $table->tinyInteger('status')->default(1)->comment('1-active; 0-deleted; 2-inactive');
 
             $table->timestamps();
