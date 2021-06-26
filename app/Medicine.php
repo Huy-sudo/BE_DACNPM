@@ -46,10 +46,6 @@ class Medicine extends Model
             $model = $model->where('in_stock',$request['in_stock']);
         }
 
-        if(isset($request['name']) && $request['name']){
-            $model = $model->where('name',$request['name']);
-        }
-
         if(isset($request['id']) && $request['id']){
             $model = $model->where('id',$request['id']);
         }
@@ -72,7 +68,6 @@ class Medicine extends Model
             $model = $model->where('created_at','<',$to_date);
         }
 
-        $model = $model->with('unit');
         $results = $model->get();
 
         return $results;
