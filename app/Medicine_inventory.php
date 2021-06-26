@@ -96,7 +96,7 @@ class Medicine_inventory extends Model
         try {
        
         $model_medicine = new Medicine;
-
+            
         $medicine = $model_medicine->where('id',$request['medicine_id'])->first();
 
         $arrayInput['cost_per_med'] = $medicine->cost_per_med;

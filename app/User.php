@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    public function prescription()
+    {
+        return $this->hasMany(Prescription::class,'user_id','id');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

@@ -22,7 +22,6 @@ class CreatePrescriptions extends Migration
             $table->bigInteger('analysis_price')->index();
             $table->string('symptoms')->nullable();
             $table->string('diseases')->nullable();
-            $table->bigInteger('analysis_price')->index();
             $table->tinyInteger('status')->default(1)->comment('1-active; 0-deleted; 2-inactive')->nullable();
             
             $table->timestamps();

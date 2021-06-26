@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMedicinesPrescriptions extends Migration
+class CreateBills extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateMedicinesPrescriptions extends Migration
      */
     public function up()
     {
-        Schema::create('medicines_prescriptions', function (Blueprint $table) {
+        Schema::create('bills', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('code')->index();
-            $table->string('medicine_code')->index();
             $table->string('PD_code')->index();
-            $table->tinyInteger('amount')->index();
-            $table->tinyInteger('uses')->index();
-            $table->bigInteger('cost_per_med')->index();
-            $table->tinyInteger('status')->default(1)->comment('1-active; 2-deleted');
-
+            $table->bigInteger('total_price');
+            $table->tinyInteger('status')->default(1)->comment('1-active; 0-deleted; 2-inactive');
             
             $table->timestamps();
+
         });
     }
 
@@ -35,6 +32,6 @@ class CreateMedicinesPrescriptions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medicines_prescriptions');
+        Schema::dropIfExists('bills');
     }
 }

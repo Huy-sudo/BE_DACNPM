@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Variable;
 use App\Customer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class Prescription extends Model
         'customer_id',
         'user_id',
         'date',
+        'analysis_price',
         'symptoms',
         'diseases',
         'created_at',
@@ -85,6 +87,12 @@ class Prescription extends Model
         $user_id = Auth::user()->id;
 
         $arrayInput = $request;
+
+        $model_variable = new Variable;
+
+        $variable =  $model_variable->where('key','Analysis_Price')->first()->value ?? 30000;
+
+        $arrayInpurt['analysis_price'] = $variable;
 
         $arrayInput['code'] = $code;
 

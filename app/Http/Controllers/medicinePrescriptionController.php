@@ -50,12 +50,12 @@ class medicinePrescriptionController extends Controller
         return response()->json($return);
     }
 
-    public function delete(Request $request, $id)
+    public function delete( $id)
     {
         
         $model = new Medicines_prescription;
 
-        $Medicines_prescription =  $model->deletev2( $id);
+        $model->deletev2($id);
         $return = [
             'status' => '1',
             'code' => '200',
@@ -66,11 +66,6 @@ class medicinePrescriptionController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'amount'=>'integer',
-            'uses'=>'integer',
-        ]);
-        
         $arrayInput = $request->all();
         $model = new Medicines_prescription;
 

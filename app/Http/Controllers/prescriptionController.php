@@ -46,7 +46,7 @@ class prescriptionController extends Controller
 
         $model_variable = new Variable;
 
-        $limit = $model_variable->where('key','max_prescription')->first()->value ?? 40;
+        $limit = $model_variable->where('key','max_prescription')->first()->value ?? 45;
 
         if ($count_prescription < $limit) {
             $results = $model->createv2($arrayInput);
@@ -97,12 +97,6 @@ class prescriptionController extends Controller
 
     public function update(Request $request, $id)
     {
-<<<<<<< HEAD
-=======
-        $request->validate([
-            'id'=>'required|integer'
-        ]);
->>>>>>> 6a14a2c (/)
 
         $arrayInput = $request->all();
 

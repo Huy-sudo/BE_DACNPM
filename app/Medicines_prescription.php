@@ -18,6 +18,7 @@ class Medicines_prescription extends Model
         'PD_code',
         'amount',
         'uses',
+        'status',
         'cost_per_med',
         'created_at',
         'updated_at'
