@@ -28,7 +28,7 @@ class billController extends Controller
             'PD_code'=>'required|integer',
         ]);
         $model_variable = new Variable;
-        $analysis_price = $model_variable->where('key','analysis_price')->first()->value ?? 35000;
+        $analysis_price = $model_variable->where('key','Analysis_Price')->first()->value ?? 35000;
         $arrayInput = $request->all();
         $arrayInput['analysis_price']=$analysis_price;
         $arrayInput['total_price']=$analysis_price;

@@ -18,9 +18,9 @@ class Bill extends Model
         'updated_at'
     ];
 
-    public function prescription()
+    public function prescription_detail()
     {
-        return $this->hasMany(Prescription::class,'customer_id','code');
+        return $this->hasMany(Prescription::class,'PD_code','code');
     }
 
     public function Search(array $request){

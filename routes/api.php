@@ -75,22 +75,6 @@ Route::group(['middleware' => 'auth:api','prefix'=>'medicine'], function () {
     Route::delete('/{id}','medicineController@delete');
 });
 
-Route::group(['middleware' => 'auth:api','prefix'=>'disease'], function () {
-    Route::get('/','diseaseController@index');
-    Route::post('/','diseaseController@create');
-    Route::get('/{id}','diseaseController@detail');
-    Route::put('/{id}','diseaseController@update');
-    Route::delete('/{id}','diseaseController@delete');
-});
-
-Route::group(['middleware' => 'auth:api','prefix'=>'symptom'], function () {
-    Route::get('/','symptomController@index');
-    Route::post('/','symptomController@create');
-    Route::get('/{id}','symptomController@detail');
-    Route::put('/{id}','symptomController@update');
-    Route::delete('/{id}','symptomController@delete');
-});
-
 Route::group(['middleware' => 'auth:api','prefix'=>'diseaseSymptom'], function () {
     Route::get('/','diseaseSymptomController@index');
     Route::post('/','diseaseSymptomController@create');

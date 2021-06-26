@@ -79,16 +79,11 @@ class medicineController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'unit'=>'string',
-            'cost_per_med'=>'integer'
-        ]);
-        
         $arrayInput = $request->all();
 
         $model = new Medicine();
 
-        $Medicine = $model->where('id', $id)->updatev2($arrayInput);
+        $Medicine = $model->where('id', $id)->first()->updatev2($arrayInput);
 
         $return = [
             'status' => '1',

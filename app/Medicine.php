@@ -10,11 +10,6 @@ class Medicine extends Model
 {
     protected $table = 'medicines';
 
-    public $arrayUnit = [
-        '1' => 'pill',
-        '2' => 'bottle'
-    ];
-
     protected $fillable = [
         'id',
         'in_stock',

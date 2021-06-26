@@ -41,7 +41,7 @@ class Prescriptions_detail extends Model
 
     public function bill()
     {
-        return $this->hasOne(Bill::class,'PD_code','id');
+        return $this->hasOne(Bill::class,'PD_code','code');
     }
 
     public function Search(array $request){
