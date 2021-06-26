@@ -21,7 +21,7 @@ class CreateCustomers extends Migration
             $table->string('phone')->unique();
             $table->year('birth')->nullable();
             $table->string('address')->nullable();
-            $table->tinyInteger('status')->default(1)->comment('1-active; 0-deleted; 2-inactive');
+            $table->tinyInteger('status')->default(1)->comment('1-active; 2-deleted');
 
             $table->timestamps();
         });

@@ -13,7 +13,6 @@ class Bill extends Model
         'status',
         'PD_code',
         'total_price',
-        'analysis_price',
         'created_at',
         'updated_at'
     ];

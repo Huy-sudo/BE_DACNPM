@@ -13,7 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             customerTable::class,
-            diseasesTable::class,
             diseasesSymptomsTable::class,
             medicineTable::class,
             prescriptionTable::class,

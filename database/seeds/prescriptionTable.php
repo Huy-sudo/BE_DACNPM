@@ -23,6 +23,7 @@ class prescriptionTable extends Seeder
             $code = $model->generateCode() + $i;
             DB::table('prescriptions')->insert([
                 'customer_id' => rand(1,10),
+                'analysis_price' => rand(1000,100000),
                 'code' => $code,
                 'created_at'=> date("Y-m-d H:i:s"),
                 'updated_at'=> date("Y-m-d H:i:s")

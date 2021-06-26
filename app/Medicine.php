@@ -58,6 +58,10 @@ class Medicine extends Model
             $model = $model->where('cost_per_med',$request['cost_per_med']);
         }
 
+        if(isset($request['name']) && $request['name']){
+            $model = $model->where('name',$request['name']);
+        }
+
         if(isset($request['from_date']) && $request['from_date']){
             $from_date=Carbon::create($request['from_date'])->startOfDay();
             $model = $model->where('created_at','>',$from_date);
