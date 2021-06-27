@@ -27,11 +27,7 @@ class billController extends Controller
         $request->validate([
             'PD_code'=>'required|integer',
         ]);
-        $model_variable = new Variable;
-        $analysis_price = $model_variable->where('key','Analysis_Price')->first()->value ?? 35000;
         $arrayInput = $request->all();
-        $arrayInput['analysis_price']=$analysis_price;
-        $arrayInput['total_price']=$analysis_price;
         $model = new Bill();
         $results = $model->createv2($arrayInput);
         $return = [

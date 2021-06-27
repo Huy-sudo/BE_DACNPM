@@ -19,7 +19,7 @@ class Bill extends Model
 
     public function prescription_detail()
     {
-        return $this->hasMany(Prescription::class,'PD_code','code');
+        return $this->hasOne(Prescription::class,'PD_code','code');
     }
 
     public function Search(array $request){
@@ -63,6 +63,8 @@ class Bill extends Model
             $to_date=Carbon::create($request['to_date'])->endOfDay();
             $model = $model->where('created_at','<',$to_date);
         }
+
+        $model = $model->with('prescription_detail');
 
         $results = $model->get();
 

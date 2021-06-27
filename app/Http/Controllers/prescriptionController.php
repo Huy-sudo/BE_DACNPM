@@ -46,7 +46,11 @@ class prescriptionController extends Controller
 
         $model_variable = new Variable;
 
-        $limit = $model_variable->where('key','max_prescription')->first()->value ?? 45;
+        $variable =  $model_variable->where('key','Analysis_Price')->first()->value ?? 30000;
+
+        $arrayInput['analysis_price'] = $variable;
+
+        $limit = $model_variable->where('key','Max_Prescription')->first()->value ?? 45;
 
         if ($count_prescription < $limit) {
             $results = $model->createv2($arrayInput);

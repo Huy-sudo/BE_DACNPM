@@ -36,7 +36,7 @@ class Prescriptions_detail extends Model
 
     public function medicine()
     {
-        return $this->hasmany(Medicines_prescription::class,'PD_code','code');
+        return $this->hasmany(Medicines_prescription::class,'PD_code','code')->where('status',1);
     }
 
     public function bill()
@@ -128,7 +128,7 @@ class Prescriptions_detail extends Model
         $medicine_inventory = new Medicine_inventory;
         
         $model_medicine = new Medicine;
-        $abc = [];
+
         if(isset($request['status']) && $request['status'] == 2){
             $arrayInput['status'] = $request['status'];
             
@@ -150,10 +150,8 @@ class Prescriptions_detail extends Model
         if(isset($request['price_medicines']) && $request['price_medicines']){
             $arrayInput['price_medicines'] = $request['price_medicines'];
         }
+        $this->update($request);
 
-
-        $this->update($arrayInput);
-        
         return $this;
     }
 

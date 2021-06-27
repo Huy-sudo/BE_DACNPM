@@ -70,10 +70,7 @@ class prescriptionDetailController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'status'=>'integer'
-        ]);
-        
+
         $arrayInput = $request->all();
 
         $model = new Prescriptions_detail;

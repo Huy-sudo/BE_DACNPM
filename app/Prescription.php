@@ -54,6 +54,10 @@ class Prescription extends Model
             $model = $model->where('id',$request['id']);
         }
 
+        if(isset($request['customer_id']) && $request['customer_id']){
+            $model = $model->where('customer_id',$request['customer_id']);
+        }
+
         if(isset($request['from_date']) && $request['from_date']){
             $from_date=Carbon::create($request['from_date'])->startOfDay();
             $model = $model->where('created_at','>',$from_date);
@@ -74,7 +78,8 @@ class Prescription extends Model
         }
         
         $model = $model->with('prescriptionDetail.medicine');
-        $results = $model->get();
+        $sorted = $model->orderBy('created_at', 'desc');
+        $results = $sorted->get();
         
         return $results;
     }
@@ -87,12 +92,6 @@ class Prescription extends Model
         $user_id = Auth::user()->id;
 
         $arrayInput = $request;
-
-        $model_variable = new Variable;
-
-        $variable =  $model_variable->where('key','Analysis_Price')->first()->value ?? 30000;
-
-        $arrayInpurt['analysis_price'] = $variable;
 
         $arrayInput['code'] = $code;
 
