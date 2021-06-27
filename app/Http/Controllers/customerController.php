@@ -55,12 +55,12 @@ class customerController extends Controller
         return response()->json($return);
     }
 
-    public function delete(Request $request, $id)
+    public function delete($id)
     {
         
         $model = new Customer();
 
-        $Customer =  $model->deletev2( $id);
+        $model->deletev2( $id);
         $return = [
             'status' => '1',
             'code' => '200',

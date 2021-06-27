@@ -19,7 +19,7 @@ class Bill extends Model
 
     public function prescription_detail()
     {
-        return $this->hasOne(Prescription::class,'PD_code','code');
+        return $this->hasOne(Prescription::class,'code','PD_code');
     }
 
     public function Search(array $request){
@@ -106,10 +106,13 @@ class Bill extends Model
         return $Bill;
     }
 
-    public function updatev2(Array $request)
+    public function updatev2(Array $request, $id)
     {
 
         $arrayInput = [];
+
+        $bill = Bill::where('id', $id)->first();
+
         if(isset($request['status']) && $request['status']){
             $arrayInput['status'] =$request['status'];
         }
@@ -118,9 +121,9 @@ class Bill extends Model
             $arrayInput['analysis_price'] =$request['analysis_price'];
         }
 
-        $this->update($arrayInput);
+        $bill->update($arrayInput);
         
-        return $this;
+        return $bill;
     }
 
     public function generateCode()

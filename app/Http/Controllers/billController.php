@@ -70,10 +70,6 @@ class billController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'PD_code'=>'string',
-            'analysis_price'=>'integer',
-        ]);
         
         $arrayInput = $request->all();
 

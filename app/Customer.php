@@ -16,6 +16,7 @@ class Customer extends Model
         'name',
         'sex',
         'birth',
+        'status',
         'phone',
         'address',
         'created_at',
@@ -73,7 +74,9 @@ class Customer extends Model
             $model = $model->where('created_at','<',$to_date);
         }
 
-        $results = $model->get();
+        $sorted = $model->orderBy('created_at', 'desc');
+
+        $results = $sorted->get();
 
         return $results;
     }

@@ -10,6 +10,7 @@ use App\User;
 use Carbon\Carbon;
 use App\Variable;
 use App\Medicine_inventory;
+use App\Bill;
 
 class reportController extends Controller
 {
@@ -20,6 +21,17 @@ class reportController extends Controller
         $arrRequest = $request->all();
 
         $result = $model->report_medicine($arrRequest);
+
+        return response()->json($result);
+    }
+
+    public function reportPrescription(Request $request)
+    {
+        $model = new Prescription;
+
+        $arrRequest = $request->all();
+
+        $result = $model->search($arrRequest);
 
         return response()->json($result);
     }

@@ -72,6 +72,8 @@ class Medicine extends Model
             $model = $model->where('created_at','<',$to_date);
         }
 
+        $model = $model->with('unit');
+
         $results = $model->get();
 
         return $results;

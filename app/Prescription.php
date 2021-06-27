@@ -73,6 +73,11 @@ class Prescription extends Model
             $model = $model->where('created_at','>',$now->startOfDay());
         }
 
+        // if(isset($request['month']) && $request['month']){
+        //     $now = Carbon::now();
+        //     $model = $model->where('created_at','>',$now->startOfDay());
+        // }
+
         if(isset($request['data_customer']) && $request['data_customer'] ){
             $model = $model->with('customer');
         }

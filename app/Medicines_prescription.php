@@ -144,6 +144,7 @@ class Medicines_prescription extends Model
         $model_prescription_detail = new Prescriptions_detail;
 
         $prescription_detail = $model_prescription_detail->where('code',$Medicines_prescription['PD_code'])->first();
+        
         $prescription_detail->updatev2([
             'price_medicines'=>0
             ]);

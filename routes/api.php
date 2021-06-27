@@ -23,6 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'auth:api','prefix'=>'report'], function () {
     Route::get('/medicine','reportController@reportMedicine');
+    Route::get('/prescription','reportController@reportPrescription');
 });
 
 
