@@ -68,6 +68,19 @@ class Prescription extends Model
             $model = $model->where('created_at','<',$to_date);
         }
 
+        if(isset($request['customer_name']) && $request['customer_name']){
+            $customer = new Customer;
+            $customer = $customer->where('name',$request['customer_name'])->first();
+            $model = $model->where('customer_id',$customer->id);
+        }
+
+        if(isset($request['month']) && $request['month']){
+            $from_month=Carbon::createFromDate('2021',$request['month'],'01')->startOfMonth();
+            $to_month=Carbon::createFromDate('2021',$request['month'],'01')->endOfMonth();
+            $model = $model->where('created_at','<',$to_month);
+            $model = $model->where('created_at','>',$from_month);
+        }
+
         if(isset($request['today']) && $request['today'] == 1){
             $now = Carbon::now();
             $model = $model->where('created_at','>',$now->startOfDay());
@@ -82,7 +95,7 @@ class Prescription extends Model
             $model = $model->with('customer');
         }
         
-        $model = $model->with('prescriptionDetail.medicine');
+        $model = $model->with('customer')->with('prescriptionDetail.medicine');
         $sorted = $model->orderBy('created_at', 'desc');
         $results = $sorted->get();
         

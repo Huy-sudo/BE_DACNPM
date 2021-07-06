@@ -29,6 +29,17 @@ class customerController extends Controller
             'name'=>'required|string'
         ]);
         $arrayInput = $request->all();
+        $customer = new Customer;
+        $customer = $customer->where('phone',$arrayInput['phone'])->first();
+        if ($customer)
+        {
+            $return['data'] = null;
+
+            $return['message'] = 'Phone number invalid. There is already one customer has this phone number!';
+    
+            return response()->json($return);
+        }
+       
         $model = new Customer();
         $results = $model->createv2($arrayInput);
         $return = [

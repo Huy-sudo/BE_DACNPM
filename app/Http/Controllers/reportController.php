@@ -22,7 +22,13 @@ class reportController extends Controller
 
         $result = $model->report_medicine($arrRequest);
 
-        return response()->json($result);
+        $return = [
+            'status' => '1',
+            'code' => '200',
+            'data' => $result
+        ];
+
+        return response()->json($return);
     }
 
     public function reportPrescription(Request $request)

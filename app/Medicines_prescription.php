@@ -146,7 +146,7 @@ class Medicines_prescription extends Model
         $prescription_detail = $model_prescription_detail->where('code',$Medicines_prescription['PD_code'])->first();
         
         $prescription_detail->updatev2([
-            'price_medicines'=>0
+            'price_medicines'=> $prescription_detail->price_medicines - $Medicines_prescription->cost_per_med * $Medicines_prescription['amount']
             ]);
 
         return $Medicines_prescription;

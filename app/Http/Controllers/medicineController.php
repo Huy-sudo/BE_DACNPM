@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Medicine;
+use App\Variable;
 
 class medicineController extends Controller
 {
@@ -33,8 +34,20 @@ class medicineController extends Controller
 
         $arrayInput = $request->all();
 
+        $model = new medicine;
+
+        $medicine = $model->Search([]);
+
+        $count_medicine  = $medicine->count();
+
         $model = new Medicine();
 
+        $model_variable = new Variable;
+
+        $limit = $model_variable->where('key','Max_Medicine')->first()->value ?? 30;
+
+        if ($count_medicine < $limit)
+       { 
         $results = $model->createv2($arrayInput);
 
         $return = [
@@ -42,6 +55,13 @@ class medicineController extends Controller
             'code' => '200',
             'data' => $results
         ];
+
+        return response()->json($return);
+        }
+
+        $return['data'] = null;
+
+        $return['message'] = 'Vuot qua so luong thuoc!';
 
         return response()->json($return);
 
@@ -61,12 +81,12 @@ class medicineController extends Controller
         return response()->json($return);
     }
 
-    public function delete(Request $request, $id)
+    public function delete( $id)
     {
         
         $model = new Medicine();
 
-        $Medicine =  $model->deletev2( $id);
+        $model->deletev2($id);
 
         $return = [
             'status' => '1',

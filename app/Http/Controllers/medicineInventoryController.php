@@ -11,7 +11,6 @@ class medicineInventoryController extends Controller
         $arrayInput = $request->all();
         $model = new Medicine_inventory();
         $results = $model->Search($arrayInput);
-        dd(210);
         $return = [
             'status' => '1',
             'code' => '200',
@@ -24,7 +23,7 @@ class medicineInventoryController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'medicine_id'=>'required|string',
+            'medicine_code'=>'required|string',
             'amount'=>'required|integer',
             'type'=>'required|integer'
         ]);

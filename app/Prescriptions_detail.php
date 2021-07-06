@@ -105,7 +105,7 @@ class Prescriptions_detail extends Model
     public function detail( $id)
     {
         
-        $Prescriptions_detail = Prescriptions_detail::where('id', $id)->with('medicine')->with('bill')->with('customer')->first();
+        $Prescriptions_detail = Prescriptions_detail::where('id', $id)->with('medicine.unit')->with('bill')->with('customer')->first();
 
         return $Prescriptions_detail;
     }

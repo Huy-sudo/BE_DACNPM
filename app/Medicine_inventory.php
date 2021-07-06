@@ -14,7 +14,7 @@ class Medicine_inventory extends Model
     protected $table = 'medicines_inventory';
 
     protected $fillable = [
-        'medicine_id',
+        'medicine_code',
         'type',
         'amount',
         'cost_per_med',
@@ -31,7 +31,7 @@ class Medicine_inventory extends Model
 
     public function medicine()
     {
-        return $this->hasOne(Medicine::class,'id','medicine_id');
+        return $this->hasOne(Medicine::class,'code','medicine_code');
     }
 
     public function Search(array $request){
@@ -80,6 +80,13 @@ class Medicine_inventory extends Model
             $model = $model->where('created_at','<',$to_date);
         }
 
+        if(isset($request['month']) && $request['month']){
+            $from_month=Carbon::createFromDate('2021',$request['month'],'01')->startOfMonth();
+            $to_month=Carbon::createFromDate('2021',$request['month'],'01')->endOfMonth();
+            $model = $model->where('created_at','<',$to_month);
+            $model = $model->where('created_at','>',$from_month);
+        }
+
         $results = $model->get();
 
         return $results;
@@ -97,7 +104,7 @@ class Medicine_inventory extends Model
        
         $model_medicine = new Medicine;
             
-        $medicine = $model_medicine->where('id',$request['medicine_id'])->first();
+        $medicine = $model_medicine->where('code',$request['medicine_code'])->first();
 
         $arrayInput['cost_per_med'] = $medicine->cost_per_med;
 
@@ -147,8 +154,8 @@ class Medicine_inventory extends Model
             $arrayInput['status'] =$request['status'];
         }
 
-        if(isset($request['medicince_id']) && $request['medicince_id']){
-            $arrayInput['medicince_id'] =$request['medicince_id'];
+        if(isset($request['medicince_code']) && $request['medicince_code']){
+            $arrayInput['medicince_code'] =$request['medicince_code'];
         }
 
         if(isset($request['type']) && $request['type']){
@@ -185,7 +192,18 @@ class Medicine_inventory extends Model
             $model = $model->where('created_at','<',$to_date);
         }
 
-        $model->groupBy('medicine_id')->selectRaw('medicine_id, sum(amount) as total_amount, count(*) as total_uses');
+        if(isset($request['month']) && $request['month']){
+            $from_month=Carbon::createFromDate('2021',$request['month'],'01')->startOfMonth();
+            $to_month=Carbon::createFromDate('2021',$request['month'],'01')->endOfMonth();
+            $model = $model->where('created_at','<',$to_month);
+            $model = $model->where('created_at','>',$from_month);
+        }
+
+        $model = $model->where('status',1);
+
+        $model= $model->with('medicine.unit');
+
+        $model->groupBy('medicine_code')->selectRaw('medicine_code, sum(amount) as total_amount, count(*) as total_uses');
 
         $result = $model->get();
         

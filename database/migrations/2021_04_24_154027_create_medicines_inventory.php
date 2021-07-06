@@ -15,7 +15,7 @@ class CreateMedicinesInventory extends Migration
     {
         Schema::create('medicines_inventory', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->tinyInteger('medicine_id')->index();
+            $table->string('medicine_code')->index();
             $table->tinyInteger('amount')->index();
             $table->tinyInteger('type')->default(1)->comment('1-import; 2-export')->nullable(); 
             $table->bigInteger('cost_per_med')->index();

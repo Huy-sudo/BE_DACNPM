@@ -31,11 +31,6 @@ class prescriptionController extends Controller
             'customer_id'=>'required|integer',
         ]);
 
-        $return = [
-            'status' => '1',
-            'code' => '200',
-        ];
-
         $arrayInput = $request->all();
 
         $model = new prescription;
@@ -58,6 +53,11 @@ class prescriptionController extends Controller
             $model2 = new Prescriptions_detail;
 
             $results['PD'] = $model2->createv2(['prescription_id'=>$results->id]);
+
+            $return = [
+                'status' => '1',
+                'code' => '200',
+            ];
 
             $return['data'] = $results;
 

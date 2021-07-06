@@ -12,10 +12,12 @@ class Medicine extends Model
 
     protected $fillable = [
         'id',
+        'name',
         'in_stock',
         'unit',
         'cost_per_med',
         'code',
+        'status',
         'created_at',
         'updated_at'
     ];
@@ -85,6 +87,8 @@ class Medicine extends Model
         $arrayInput = $request;
 
         $arrayInput['status'] = 1;
+
+        $arrayInput['in_stock'] = 0;
 
         $results = Medicine::create($arrayInput);
 
