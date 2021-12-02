@@ -72,6 +72,7 @@ class customerController extends Controller
         $model = new Customer();
 
         $model->deletev2( $id);
+        
         $return = [
             'status' => '1',
             'code' => '200',
